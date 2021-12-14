@@ -1,0 +1,79 @@
+include <stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int coeff;
+    int expo;
+    struct node* next;
+}*newnode,*temp,*a;
+struct node* head=NULL;
+struct node* tail=NULL;
+struct node* create(struct node* head)
+{
+    int ch;
+    int c,e;
+    do
+    {
+        newnode=(struct node*)malloc(sizeof(struct node));
+        printf("Enter the coefficient value to insert in a single linked list:\n");
+        scanf("%d",&c);
+        printf("Enter the exponentiation value to insert in a single linked list:\n");
+        scanf("%d",&e);
+        newnode->coeff=c;
+        newnode->expo=e;
+        newnode->next=NULL;
+        if(head==NULL)
+        {
+            head=newnode;
+            tail=newnode;
+        }
+        else
+        {
+            tail->next=newnode;
+            tail=newnode;
+        }
+        printf("Enter 1 to continue:\n");
+        fflush(stdin);
+        scanf("%d",&ch);
+    }while(ch==1);
+    return head;
+}
+void display(struct node* head)
+{
+    /*int count=0;*/
+    printf("The created single linked list is:\n");
+    temp=head;
+    while(temp!=NULL)
+    {
+        printf("+%dx^%d",temp->coeff,temp->expo);
+        /*count++;*/
+        temp=temp->next;
+    }
+    /*printf("No of elements in the single linked list are:%d\n",count);*/
+}
+void main()
+{
+    struct node *head1=NULL,*head2=NULL;
+    struct node *a,*b;
+    /*int choice=0;
+    while(choice<3)
+    {
+        printf("# Operations on Single linked list are:\n");
+        printf("1.Creation\n");
+        printf("2.Display\n");
+        printf("Others:Exit()\n");
+        printf("Enter your choice:\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:*/
+    printf("enter 1st polynomial:\n");
+    a=create(head1);
+    printf("enter 2nd polynomial:\n");
+    b=create(head2);
+    printf("the 1st polynomial is:\n");
+    display(a);
+    printf("the 2nd polynomial is\n");
+    display(b);
+    
+}
