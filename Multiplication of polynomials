@@ -6,7 +6,7 @@ struct node
         int coeff;
         int expo;
         struct node *next;
-}*newnode,*temp,*temp1,*temp2;
+}*newnode,*temp,*temp1,*temp2,*head3=NULL;
 struct node *head=NULL;
 struct node *tail=NULL;
 struct node* create(struct node *head)
@@ -50,17 +50,35 @@ void display(struct node *head)
 }
 struct node* mul_poly(struct node *head1,struct node *head2)
 {
+    int value=0;
         temp1=head1;
-        temp2=head2;
         while(temp1!=NULL)
         {
                 temp2=head2;
                 while(temp2!=NULL)
                 {
-                        printf("+%dx^%d",temp1->coeff*temp2->coeff,temp1->expo+temp2->expo);
-                        temp2=temp2->next;
+                    newnode=(struct node*)malloc(sizeof(struct node));
+                    newnode->coeff=temp1->coeff*temp2->coeff;
+                    newnode->expo=temp1->expo+temp2->expo;
+                    newnode->next=NULL;
+                    if(head3==NULL)
+                    {
+                        head3=newnode;
+                        tail=newnode;
+                    }
+                    else
+                    {
+                        tail->next=newnode;
+                        tail=newnode;
+                    }
+                    temp2=temp2->next;
                 }
                 temp1=temp1->next;
+        }
+        temp1=head3;
+        while(temp1!=NULL)
+        {
+            temp1=temp1->next;
         }
 
 }
