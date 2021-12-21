@@ -23,6 +23,7 @@ void create()
         {
             head=newnode;
             tail=newnode;
+            newnode->next=head;
         }
         else
         {
@@ -100,18 +101,46 @@ void deletion_at_beg()
 void deletion_at_end()
 {
     temp=head;
-    while(temp->next!=head)
+    while(temp->next!=tail)
     {
         temp=temp->next;
     }
     temp->next=head;
     tail=temp;
 }
+//Deletion at specified position.
+void deletion_at_pos()
+{
+    int position;
+    temp=head;
+    printf("Enter the position where the element is deleted:");
+    scanf("%d",&position);
+    for(int i=0;i<position-1;i++)
+    {
+        temp=temp->next;
+    }
+    temp->next=temp->next->next;
+}
+//To count the number of present in a circular linked list.
+void count()
+{
+    int count=0;
+    temp=head;
+    while(temp->next!=head)
+    {
+        printf("# %d #",temp->data);
+        temp=temp->next;
+        count+=1;
+    }
+    printf("# %d #",temp->data);
+    count+=1;
+    printf("\nThe number of elements present in a circular linked list is%d\n",count);
+}
 //Main function.
 void main()
 {
     int choice=0;
-    while(choice<8)
+    while(choice<10)
     {
         printf("\nOperations on Circular linked list\n");
         printf("1.creation of circular linked list\n");
@@ -121,6 +150,8 @@ void main()
         printf("5.insertion at specified position\n");
         printf("6.deletion at beginning\n");
         printf("7.deletion at ending\n");
+        printf("8.deletion at specified position\n");
+        printf("9.To count the number of elements present in a circular linked list\n");
         printf("others:to exit()\n");
         printf("enter your choice:\n");
         scanf("%d",&choice);
@@ -146,6 +177,12 @@ void main()
                     break;
             case 7:
                     deletion_at_end();
+                    break;
+            case 8:
+                    deletion_at_pos();
+                    break;
+            case 9:
+                    count();
                     break;
         }
     }
