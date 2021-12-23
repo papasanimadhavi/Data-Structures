@@ -1,3 +1,4 @@
+//Addition of two polynomials.
 #include <stdio.h>
 #include<stdlib.h>
 struct node
