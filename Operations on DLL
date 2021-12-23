@@ -127,11 +127,35 @@ void delete_at_pos()
     temp1->prev=NULL;
     temp1->next=NULL;
 }
+//To count the number of elements DLL.
+void count()
+{
+    int count=0;
+    temp=head;
+    while(temp!=NULL)
+    {
+        printf("# %d #",temp->data);
+        count+=1;
+        temp=temp->next;
+    }
+    printf("\nThe number of elements present in DLL are:%d",count);
+}
+//Reversin of DLL.
+void reverse()
+{
+    temp=tail;
+    while(temp->prev!=NULL)
+    {
+        printf("# %d #",temp->data);
+        temp=temp->prev;
+    }
+    printf("# %d #",temp->data);
+}
 //Main function.
 void main()
 {
     int choice=0;
-    while(choice<9)
+    while(choice<11)
     {
         printf("\nOperations on double linked list.\n");
         printf("1.Creation of double linked list.\n");
@@ -142,6 +166,8 @@ void main()
         printf("6.To delete an element from the beginning.\n");
         printf("7.To delete an element from the ending.\n");
         printf("8.To delete an element from specified position.\n");
+        printf("9.To count the number of elements present in DLL.\n");
+        printf("10.Reversing of DLL.\n");
         printf("Enter your choice:\n");
         scanf("%d",&choice);
         switch(choice)
@@ -169,6 +195,12 @@ void main()
                     break;
             case 8:
                     delete_at_pos();
+                    break;
+            case 9:
+                    count();
+                    break;
+            case 10:
+                    reverse();
                     break;
         }
     }
