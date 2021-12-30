@@ -164,11 +164,6 @@ struct node* Mul_polynomial(struct node *head1,struct node *head2)
          }
          temp1=temp1->next;
     }
-    return head3;
-}
-struct node* aftermul(struct node* head3)
-{
-    struct node *temp2=NULL;
     temp=head3;
     while(temp->next!=NULL)
     {
@@ -198,9 +193,9 @@ struct node* aftermul(struct node* head3)
 void main()
 {
     struct node *head1=NULL,*head2=NULL,*head3=NULL;
-    struct node *a,*b,*d,*c;
+    struct node *a,*b,*c;
     int choice=0;
-    while(choice<10)
+    while(choice<9)
     {
         printf("\nOperations on Single linked list are:\n");
         printf("1.Creation of 1st polynomial\n");
@@ -210,8 +205,7 @@ void main()
         printf("5.Add polynomials\n");
         printf("6.Sub polynomials\n");
         printf("7.Mul polynomials\n");
-        printf("8.simplification of two polynomials after multiplication.\n");
-        printf("9.printing of two polynomials after multiplication.\n");
+        printf("8.printing of two polynomials after multiplication.\n");
         printf("Others:Exit()\n");
         printf("Enter your choice:\n");
         scanf("%d",&choice);
@@ -243,10 +237,7 @@ void main()
                     c=Mul_polynomial(a,b);
                     break;
             case 8:
-                    d=aftermul(c);
-                    break;
-            case 9:
-                    display(d);
+                    display(c);
                     break;
         }
     }
