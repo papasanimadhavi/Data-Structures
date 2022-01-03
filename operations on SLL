@@ -158,22 +158,43 @@ void reverse()
     }
     head=prevnode;
 }
+//To sort the given single linked list.
+void sorting()
+{
+    struct node *i,*j;
+    int var;
+    temp=head;
+    for(i=temp;i->next!=NULL;i=i->next)
+    {
+        for(j=i->next;j!=NULL;j=j->next)
+        {
+            if(i->data>j->data)
+            {
+                var=i->data;
+                i->data=j->data;
+                j->data=var;
+            }
+        }
+    }
+}
+//Main function.
 int main()
 {
         int choice=0;
-        while(choice<11)
+        while(choice<12)
         {
-            printf("Operations on Single linked list are:\n");
-            printf("1.Creation\n");
-            printf("2.Display\n");
-            printf("3.Insertion at beginning\n");
-            printf("4.Insertion at ending\n");
-            printf("5.Insertion at specified position\n");
-            printf("6.Deletion at beginning\n");
-            printf("7.Deletion at ending\n");
-            printf("8.Deletion at specified position\n");
-            printf("9.To count the number of elements in a Created Single Linked List:\n");
-            printf("10.To reverse the elements of a Created single linked list:\n");
+            printf("\nOperations on Single linked list are:\n");
+            printf("1.Creation.\n");
+            printf("2.Display.\n");
+            printf("3.Insertion at beginning.\n");
+            printf("4.Insertion at ending.\n");
+            printf("5.Insertion at specified position.\n");
+            printf("6.Deletion at beginning.\n");
+            printf("7.Deletion at ending.\n");
+            printf("8.Deletion at specified position.\n");
+            printf("9.To count the number of elements in a Created Single Linked List.\n");
+            printf("10.To reverse the elements of a Created single linked list.\n");
+            printf("11.sorting of given single linked list.\n");
             printf("Others:Exit()\n");
             printf("Enter your choice:\n");
             scanf("%d",&choice);
@@ -209,7 +230,11 @@ int main()
                 case 10:
                         reverse();
                         break;
+                case 11:
+                        sorting();
+                        break;
                 default:
                         break;
             }
         }
+}
