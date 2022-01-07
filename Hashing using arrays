@@ -1,0 +1,119 @@
+//Hashing using arrays.
+#include<stdio.h>
+#define size 10
+//Initialization.
+void init(int arr[])
+{
+    int i;
+    for(int i=0;i<size;i++)
+    {
+        arr[i]=0;
+    }
+}
+//insertion.
+void insert(int arr[])
+{
+    int ch;
+    do{
+    int key;
+    printf("enter the key to insert:\n");
+    scanf("%d",&key);
+    int value=key%size;
+    if(arr[value]==0)
+    {
+        arr[value]=key;
+    }
+    else
+    {
+        printf("collision occurs\n");
+        printf("arr[%d] already has %d element\n",value,key);
+    }
+    printf("\nenter 1 to continue and others to exit().\n");
+    scanf("%d",&ch);
+    }
+    while(ch==1);
+    
+}
+//Deletion.
+void delete(int arr[])
+{
+    int ch;
+    do{
+    int key;
+    printf("enter key to delete:\n");
+    scanf("%d",&key);
+    int value=key%size;
+    if(arr[value]=key)
+    {
+        arr[value]=0;
+    }
+    else
+    {
+        printf("Element is not present in given array.\n");
+    }
+    printf("enter 1 to continue and others to delete.\n");
+    scanf("%d",&ch);
+    }
+    while(ch==1);
+}
+//Searching.
+void search(int arr[])
+{
+    int key;
+    printf("enter key to serach:\n");
+    scanf("%d",&key);
+    int value=key%size;
+    if(arr[value]==key)
+    {
+        printf("%d is found at arr[%d]",key,value);
+    }
+    else
+    {
+        printf("element not found.\n");
+    }
+}
+//printing.
+void print(int arr[])
+{
+    for(int i=0;i<size;i++)
+    {
+    printf("arr[%d] = %d\n",i,arr[i]);
+    }
+}
+//main function.
+int main()
+{
+    int arr[size];
+    int choice=0;
+    while(choice<6)
+    {
+        printf("\nHashing\n");
+        printf("1.Initialization of an array.\n");
+        printf("2.Inserting of elements in an array.\n");
+        printf("3.Deletion of an element in an array.\n");
+        printf("4.To search an element in an array.\n");
+        printf("5.Printing of elements in an array.\n");
+        printf("Others:To Exit().\n");
+        printf("enter your choice.\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    init(arr);
+                    break;
+            case 2:
+                    insert(arr);
+                    break;
+            case 3:
+                    delete(arr);
+                    break;
+            case 4:
+                    search(arr);
+                    break;
+            case 5:
+                    print(arr);
+                    break;
+        }
+    }
+    
+}
