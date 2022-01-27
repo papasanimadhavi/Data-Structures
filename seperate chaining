@@ -1,0 +1,148 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define size 10
+struct hashtable
+{
+    int data;
+    struct hashtable *next;
+};
+void insert(struct hashtable *table[size])
+{
+    int ch,value;
+    do{
+        struct hashtable *newnode=(struct hashtable*)malloc(sizeof(struct hashtable));
+        printf("enter the value to insert:\n");
+        scanf("%d",&value);
+        int i=value%10;
+        newnode->data=value;
+        newnode->next=NULL;
+        if(table[i]==NULL)
+        {
+            table[i]->next=newnode;
+        }
+        else
+        {
+            newnode->next=table[i]->next;
+            table[i]->next=newnode;
+        }
+        printf("enter 1 to continue and others to exit().\n");
+        scanf("%d",&ch);
+    }
+    while(ch==1);
+}
+void search(struct hashtable *table[size])
+{
+    int value;
+    printf("enter value to search:");
+    scanf("%d",&value);
+    int i=value%10;
+    int flag=0;
+    struct hashtable *temp=table[i]->next;
+    while(temp!=NULL)
+    {
+        if(temp->data==value)
+        {
+            flag=1;
+            break;
+        }
+        else
+        {
+            temp=temp->next;
+        }
+    }
+    if(flag==1)
+    {
+        printf("element %d is found\n",value);
+    }
+    else
+    {
+        printf("element %d not found\n",value);
+    }
+}
+void delete(struct hashtable *table[size])
+{
+    int value;
+    printf("enter element to delete:");
+    scanf("%d",&value);
+    int i=value%10;
+    int flag=0;
+    struct hashtable *temp=table[i]->next,*temp1;
+    while(temp!=NULL)
+    {
+        if(temp->data==value)
+        {
+            flag=1;
+            break;
+        }
+        else
+        {
+            temp1=temp;
+            temp=temp->next;
+        }
+    }
+    if(flag==1)
+    {
+        temp1->next=temp->next;
+        free(temp);
+    }
+    else
+    {
+        printf("element %d not found to delete",value);
+    }
+}
+void display(struct hashtable *table[size])
+{
+    struct hashtable *temp;
+    int i;
+    for(i=0;i<size;i++)
+    {
+        temp=table[i]->next;
+        printf("%d||<->",i);
+        while(temp!=NULL)
+        {
+            printf("%d|<->",temp->data);
+            temp=temp->next;
+        }
+        printf("NULL\n");
+    }
+}
+/*int hash(int value)
+{
+    return value%size;
+}*/
+int main()
+{
+    struct hashtable *table[size];
+    int choice=0,i;
+    for(i=0;i<size;i++)
+    {
+        table[i]=(struct hashtable *)malloc(sizeof(struct hashtable));
+        table[i]->next=NULL;
+    }
+    while(choice<5)
+    {
+        printf("program to implement seperate chaining\n");
+        printf("1.insertion\n");
+        printf("2.search\n");
+        printf("3.deletion\n");
+        printf("4.display\n");
+        printf("others:toexit()\n");
+        printf("enter your choice:\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    insert(table);
+                    break;
+            case 2:
+                    search(table);
+                    break;
+            case 3:
+                    delete(table);
+                    break;
+            case 4:
+                    display(table);
+                    break;
+        }
+    }
+}
