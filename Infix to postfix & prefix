@@ -21,16 +21,17 @@ void push(char item)
     }        
 }        
 
-int pop()  
+char pop()  
 {        
     char item;
     if(top<0)
     {    
         printf("stack Underflow");
+        exit(1);
     }  
     else
     {  
-        stack[top]=item;
+       item=stack[top];
         top--;          
         return item;    
     }      
@@ -68,39 +69,39 @@ int precedence(char symbol)
     }    
 }
 
-void reverse(char new_exp[],char infix_exp[])      
+void reverse(char infix_exp[],char new_exp[])      
 {                                    
     int i=0;                      
     int count=0;                  
-    while(new_exp[i]!='\0')      
+    while(infix_exp[i]!='\0')      
     {                            
         i++;                    
     }                      
     i--;                  
-    while(new_exp[i]!='\0')
+    while(i>=0)
     {                  
-        if(new_exp[i]==')')
+        if(infix_exp[i]==')')
         {                
-            infix_exp[count]='(';  
+            new_exp[count]='(';  
             i--;            
             count++;      
         }  
-        else if(new_exp[i]=='(')  
+        else if(infix_exp[i]=='(')  
         {                  
-            infix_exp[count]=')';
+            new_exp[count]=')';
             i--;                
             count++;          
         }    
         else  
         {      
-            infix_exp[count]=new_exp[i];
+            new_exp[count]=infix_exp[i];
             i--;      
             count++;  
         }        
        
     }  
    
-    infix_exp[count++]='\0';  
+    new_exp[count++]='\0';  
 }        
    
    
@@ -111,7 +112,11 @@ void infix_to_postfix(char infix_exp[],char postfix_exp[])
     char item;      
     char x;        
     item=infix_exp[i];  
-    while(item=='\0')
+    
+    push('(');
+    strcat(infix_exp,")");
+    
+    while(item!='\0')
     {                
         if(item=='(')  
         {              
@@ -148,15 +153,17 @@ void infix_to_postfix(char infix_exp[],char postfix_exp[])
         {                
             printf("invalid\n");
         }      
-    }      
+        i++;      
     item=infix_exp[i];  
+    }
+    postfix_exp[j]='\0';
  
 }      
 
 void main()  
 {            
    
-    char infix_exp[SIZE],postfix_exp[SIZE],prefix_exp[SIZE],new_exp[SIZE];      
+    char infix_exp[size],postfix_exp[size],prefix_exp[size],new_exp[size];      
     int choice=0;                
     printf("enter infix expression:\n");
     gets(infix_exp);              
