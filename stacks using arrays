@@ -1,0 +1,72 @@
+//Operations on stacks using arrays.
+#include<stdio.h>
+#define size 10
+
+int stack[size];
+int top=-1;
+//Pushing operation
+void push()
+{
+    int item;
+        if(top>size-1)
+        {
+            printf("Stack is overflow.\n");
+        }
+        else
+        {
+            printf("enter the item to push into the stack:");
+            scanf("%d",&item);
+            top++;
+            stack[top]=item;
+        }
+}
+//Poping operation
+void pop()
+{
+    if(top<0)
+    {
+        printf("stack is underflow.\n");
+    }
+    else
+    {
+        top--;
+    }
+}
+//Display
+void display()
+{
+    int i;
+    printf("The elements in the stack are:\n");
+    for(i=0;i<=top;i++)
+    {
+        printf("%d",stack[i]);
+    }
+}
+//Main function.
+int main()
+{
+    int choice=0;
+    while(choice<4)
+    {
+        printf("\nOperations on stacks.\n");
+        printf("1.Push operation.\n");
+        printf("2.Pop operation.\n");
+        printf("3.Displaying elements in a stack.\n");
+        printf("Others:Toexit().\n");
+        printf("enter your choice:\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    push();
+                    break;
+            case 2:
+                    pop();
+                    break;
+            case 3:
+                    display();
+                    break;
+            
+        }
+    }
+}
