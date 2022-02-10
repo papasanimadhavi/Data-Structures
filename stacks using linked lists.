@@ -1,0 +1,86 @@
+//Operations on stacks using Linked lists.
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+}*newnode,*temp;
+
+struct node *head=NULL;
+struct node *tail=NULL;
+
+//Pushing.
+void push()
+{
+    int value,ch;
+    do{
+        newnode = (struct node*)malloc(sizeof(struct node));
+        printf("enter value to push into the stack:\n");
+        scanf("%d",&value);
+        newnode->data=value;
+        newnode->next=NULL;
+        if(head==NULL)
+        {
+            head=newnode;
+            tail=newnode;
+        }
+        else
+        {
+            newnode->data=value;
+            newnode->next=head;
+            head=newnode;
+        }
+        printf("enter 1 to continue and others to exit().\n");
+        scanf("%d",&ch);
+    }while(ch==1);
+}
+
+
+//Poping
+void pop()
+{
+    temp=head;
+    head=head->next;
+    temp->next=NULL;
+}
+
+//Displaying.
+void display()
+{
+    temp=head;
+    printf("stacks elements are:\n");
+    while(temp!=NULL)
+    {
+        printf("# %d #",temp->data);
+        temp=temp->next;
+    }
+}
+
+//Main function.
+int main()
+{
+    int choice=0;
+    while(choice<4)
+    {
+        printf("\nOperations on stacks using linked lists.\n");
+        printf("1.Push operation.\n");
+        printf("2.Pop operation.\n");
+        printf("3.Display operation.\n");
+        printf("Others:Toexit().");
+        printf("enter your choice:\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    push();
+                    break;
+            case 2:
+                    pop();
+                    break;
+            case 3:
+                    display();
+                    break;
+        }
+    }
+}
