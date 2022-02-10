@@ -1,0 +1,190 @@
+#include<stdio.h>
+#include<ctype.h>
+#include<stdlib.h>
+#include<string.h>
+
+#define size 100
+
+char stack[size];
+int top=-1;  
+
+void push(char item)
+{                
+    if(top>=size-1)
+    {              
+        printf(" stack Overflow");
+    }                  
+    else              
+    {                
+        top++;        
+        stack[top]=item;
+    }        
+}        
+
+int pop()  
+{        
+    char item;
+    if(top<0)
+    {    
+        printf("stack Underflow");
+    }  
+    else
+    {  
+        stack[top]=item;
+        top--;          
+        return item;    
+    }      
+}          
+
+int is_operator(char symbol)  
+{                            
+    if(symbol=='^'|| symbol=='*' || symbol=='/' || symbol=='%' || symbol=='+' || symbol=='-')
+    {                          
+        return 1;    
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int precedence(char symbol)
+{    
+    if(symbol=='^' || symbol=='%')
+    {              
+        return 3;    
+    }        
+    if(symbol=='*' || symbol=='/')  
+    {              
+        return 2;  
+    }          
+    if(symbol=='+' || symbol=='-')
+    {                      
+        return 1;        
+    }      
+    else  
+    {      
+        return 0;
+    }    
+}
+
+void reverse(char new_exp[],char infix_exp[])      
+{                                    
+    int i=0;                      
+    int count=0;                  
+    while(new_exp[i]!='\0')      
+    {                            
+        i++;                    
+    }                      
+    i--;                  
+    while(new_exp[i]!='\0')
+    {                  
+        if(new_exp[i]==')')
+        {                
+            infix_exp[count]='(';  
+            i--;            
+            count++;      
+        }  
+        else if(new_exp[i]=='(')  
+        {                  
+            infix_exp[count]=')';
+            i--;                
+            count++;          
+        }    
+        else  
+        {      
+            infix_exp[count]=new_exp[i];
+            i--;      
+            count++;  
+        }        
+       
+    }  
+   
+    infix_exp[count++]='\0';  
+}        
+   
+   
+
+void infix_to_postfix(char infix_exp[],char postfix_exp[])      
+{                
+    int i=0,j=0;    
+    char item;      
+    char x;        
+    item=infix_exp[i];  
+    while(item=='\0')
+    {                
+        if(item=='(')  
+        {              
+            push(item);
+        }        
+        else if(isdigit(item) || isalpha(item))
+        {                                      
+            postfix_exp[j]=item;                  
+            j++;                              
+        }      
+        else if(is_operator(item)==1)      
+        {                            
+            x=pop();                
+            while(is_operator(x)==1 && precedence(x)>=precedence(item))  
+            {                                
+                postfix_exp[j]=x;                  
+                j++;                          
+                x=pop();                      
+            }                                  
+            push(x);                          
+            push(item);                        
+        }    
+        else if(item==')')    
+        {                    
+            x=pop();        
+            while(x!='(')  
+            {              
+                postfix_exp[j]=x;  
+                j++;          
+                x=pop();      
+            }                
+        }                
+        else              
+        {                
+            printf("invalid\n");
+        }      
+    }      
+    item=infix_exp[i];  
+ 
+}      
+
+void main()  
+{            
+   
+    char infix_exp[SIZE],postfix_exp[SIZE],prefix_exp[SIZE],new_exp[SIZE];      
+    int choice=0;                
+    printf("enter infix expression:\n");
+    gets(infix_exp);              
+    while(choice<3)              
+    {                            
+        printf("Conversion of infix to postfix expression.\n");  
+        printf("1.convertion of infix expression to postfix expression\n");    
+        printf("2.conversion of infix expression to prefix expression\n");    
+        printf("Others:Toexit()\n");                              
+        printf("enter your choice:\n");                        
+        scanf("%d",&choice);                                    
+        switch(choice)                                          
+        {                                                      
+            case 1:                                            
+                    infix_to_postfix(infix_exp,postfix_exp);            
+                    printf("The required postfix expression is:\n");    
+                    puts(postfix_exp);                                  
+                    break;                                              
+            case 2:                                            
+                    reverse(infix_exp,new_exp);                        
+                    infix_to_postfix(new_exp,postfix_exp);              
+                    reverse(postfix_exp,prefix_exp);                    
+                    printf("the required prefix expression is:\n");    
+                    puts(prefix_exp);                                  
+                    break;                          
+        }
+    }
+}                                          
+
+
+    
