@@ -1,0 +1,86 @@
+//Operations on linear queues using linked lists.
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+}*newnode,*temp;
+
+struct node *rear=NULL;
+struct node *front=NULL;
+
+
+void enqueue()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter value to insert into the queue:\n");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->next=NULL;
+    if(rear==NULL)
+    {
+        rear=newnode;
+        front=newnode;
+    }
+    else
+    {
+        rear->next=newnode;
+        rear=newnode;
+    }
+}
+
+void dequeue()
+{
+    if(rear==NULL && front==NULL)
+    {
+        printf("Queue is empty.\n");
+    }
+    else
+    {
+        temp=front;
+        front=front->next;
+        temp->next=NULL;
+        free(temp);
+    }
+}
+
+void display()
+{
+    temp=front;
+    printf("The elements in the queue are:\n");
+    while(temp!=NULL)
+    {
+        printf("# %d #",temp->data);
+        temp=temp->next;
+    }
+}
+
+int main()
+{
+    int choice=0;
+    while(choice<4)
+    {
+        printf("Operations on linked lists using linked lists.\n");
+        printf("1.Enqueue operation.\n");
+        printf("2.Dequeue operation.\n");
+        printf("3.Displaying of elements in queue.\n");
+        printf("Others:Toexit().\n");
+        printf("enter u r choice.\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    enqueue();
+                    break;
+            case 2:
+                    dequeue();
+                    break;
+            case 3:
+                    display();
+                    break;
+        }
+    }
+}
