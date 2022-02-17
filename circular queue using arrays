@@ -3,7 +3,7 @@
 #define size 10
 
 int q[size];
-int rear=0;
+int rear=0;                                                                               
 int front=0;
 int c=0;
 
@@ -69,6 +69,13 @@ void display()
             {
                 printf("%d\n",q[i]);
             }
+        }
+    }
+    else if(front==rear && c!=0)
+    {
+        for(i=front;i<size;i++)
+        {
+            printf("%d\n",q[i]);
         }
     }
     else
