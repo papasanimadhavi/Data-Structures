@@ -1,0 +1,169 @@
+//Double ended queue.
+#include<stdio.h>
+#define size 5
+
+int q[size],rear=-1,front=-1,value;
+
+//Insertion at front.
+void enqueuefront(int value)
+{
+    if(front==0 && rear==size-1 || front==rear+1)
+    {
+        printf("Queue is full.\n");
+    }
+    else if(front==-1 && rear==-1)
+    {
+        front=0;
+        rear=0;
+        q[front]=value;
+    }
+    else if(front==0)
+    {
+        front=size-1;
+        q[front]=value;
+    }
+    else
+    {
+        front--;
+        q[front]=value;
+    }
+}
+
+//Insertion at rear.
+void enqueuerear(int value)
+{
+    if(front==0 && rear==size-1 || front==rear+1)
+    {
+        printf("queue is full.\n");
+    }
+    else if(rear==-1 && front==-1)
+    {
+        rear=0;
+        q[rear]=value;
+    }
+    else if(rear==size-1)
+    {
+        rear=0;
+        q[rear]=size;
+    }
+    else
+    {
+        rear++;
+        q[rear]=value;
+    }
+}
+
+//Deletion at front.
+void dequeuefront()
+{
+    if(front==-1 && rear==-1)
+    {
+        printf("queue is empty.\n");
+    }
+    else if(front==rear)
+    {
+        printf("deleted element is:%d",q[front]);
+        front=-1;
+        rear=-1;
+    }
+    else if(front==size-1)
+    {
+        printf("deleted element is:%d",q[front]);
+        front=0;
+    }
+    else
+    {
+        printf("deleted element is:%d",q[front]);
+        front++;
+    }
+}
+
+//Deletion at rear.
+void dequeuerear()
+{
+    if(rear==-1 && front==-1)
+    {
+        printf("Queue is empty.\n");
+    }
+    else if(rear==front)
+    {
+        printf("deleted element is:%d",q[rear]);
+        rear=-1;
+        front=-1;
+    }
+    else if(rear==0)
+    {
+        printf("deleted element is:%d",q[rear]);
+        rear=0;
+    }
+    else
+    {
+        printf("deleted element is:%d",q[rear]);
+        rear--;
+    }
+    
+}
+
+//To find the value of front and value present in the front.
+void getfront()
+{
+    printf("\n front %d  value %d\n",front,q[front]);
+}
+
+//To find the value of rear and value present in the rear.
+void getrear()
+{
+    printf("\n rear %d  value %d\n",rear,q[rear]);
+}
+
+//To display the elements present in the queue.
+void display()
+{
+    int i=front;
+    while(i!=rear)
+    {
+        printf("q[%d] = %d\n",i,q[i]);
+        i=(i+1)%size;
+    }
+    printf("q[%d] = %d",rear,q[rear]);
+}
+
+void main()
+{
+    int choice=0,value;
+    while(choice<8)
+    {
+        printf("\n1.enqueuefront.\n2.enqueuerear.\n3.dequeuefront.\n4.dequeuerear.\n5.getfront.\n6.getrear.\n7.display.\n");
+        printf("enter u r choice:\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    printf("enter value to insert at front:\n");
+                    scanf("%d",&value);
+                    enqueuefront(value);
+                    break;
+            case 2:
+                    printf("enter value to insert at rear:\n");
+                    scanf("%d",&value);
+                    enqueuerear(value);
+                    break;
+            case 3:
+                    dequeuefront();
+                    break;
+            case 4:
+                    dequeuerear();
+                    break;
+            case 5:
+                    getfront();
+                    break;
+            case 6:
+                    getrear();
+                    break;
+            case 7:
+                    printf("The elements present in the double ended queue are:\n");
+                    display();
+                    break;
+        }
+    }
+}
