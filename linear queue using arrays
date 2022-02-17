@@ -1,92 +1,63 @@
-//Evaluation of postfix expression.
-#include<stdio.h>
-#include<ctype.h>
-#define size 100
 
-int stack[size];
-int top=-1;
-void push(char item)
-{
-    if(top>=size-1)
+#include <stdio.h>
+#define size 10
+int q[size],front=0,rear=0;
+void enqueue()
+{  int value;
+    
+    if(rear==size)
     {
-        printf("stack overflow.\n");
+        printf("u cannot enqueue\n");
     }
-    else
+    else{    printf("enter element to enqueue:");
+    scanf("%d",&value);
+    q[rear]=value;
+    rear++;
+}
+}
+void dequeue()
+{   if(front==rear)
+{
+    printf("u cannot dequeue\n");
+}
+else{
+    printf("value deleted is: %d",q[front]);
+    front++;
+}
+}
+void display()
+{
+    if(rear==front)
     {
-        top++;
-        stack[top]=item;
+        printf("queue is empty\n");
+    }
+    else{
+        printf("elements in queue are:\n");
+    for(int i=front;i<rear;i++)
+    {
+        printf("%d\n",q[i]);
     }
 }
-
-int pop()
-{
-    int item;
-    if(top<0)
-    {
-        printf("stack underflow.\n");
-    }
-    else
-    {
-        item=stack[top];
-        top--;
-        return item;
-    }
 }
-
-void eval(char postfix[])
+void main()
 {
-    int value,A,B;
-    char item;
-    int i;
-    for(i=0;postfix[i]!=')';i++)
+    int choice=0;
+    while(choice<4)
     {
-        item=postfix[i];
-        if(isdigit(item))
+        printf("\n1-enqueue\n2-dequeue\n3-display\n");
+        printf("enter ur choice\n");
+        scanf("%d",&choice);
+        switch(choice)
         {
-            push(item-'0');
-        }
-        else if(item=='^' || item=='%' || item=='/' || item=='*' || item=='+' || item=='-')
-        {
-            A=pop();
-            B=pop();
-            switch(item)
-            {
-                case '^':
-                        value=B^A;
-                        break;
-                case '%':
-                        value=B%A;
-                        break;
-                case '/':
-                        value=B/A;
-                        break;
-                case '*':
-                        value=B*A;
-                        break;
-                case '+':
-                        value=B+A;
-                        break;
-                case '-':
-                        value=B-A;
-                        break;
-            }
-        push(value);
+            case 1:
+                   enqueue();
+                   break;
+            case 2:
+                   dequeue();
+                   break;
+            case 3:
+                   display();
+                   break;
         }
     }
-    printf("The required value of postfix expression is:%d",pop());
-}
-
-int main()
-{
-    char postfix[size];
-    printf("enter the postfix expression.\n");
-    for(int i=0;i<=size-1;i++)
-    {
-        scanf("%c",&postfix[i]);
-        if(postfix[i]==')')
-        {
-            break;
-        }
-    }
-    eval(postfix);
 }
