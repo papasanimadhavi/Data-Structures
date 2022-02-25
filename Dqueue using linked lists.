@@ -1,0 +1,169 @@
+//Operations on Dqueue using linked lists.
+
+#include<stdio.h>
+#include<stdlib.h>
+
+struct node{
+    struct node *prev;
+    int data;
+    struct node *next;
+}*newnode,*temp;
+
+struct node *front=NULL;
+struct node *rear=NULL;
+
+
+//Enqueue at front.
+void enqueuefront()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter value to insert:\n");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->next=NULL;
+    if((front==NULL) && (rear==NULL))
+    {
+        front=newnode;
+        rear=newnode;
+        front->next=NULL;
+        front->prev=NULL;
+    }
+    else
+    {
+        newnode->next=front;
+        newnode->prev=NULL;
+        front=newnode;
+    }
+}
+
+
+//Enqueue at rear.
+void enqueuerear()
+{
+    int value;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter value to insert:\n");
+    scanf("%d",&value);
+    newnode->data=value;
+    newnode->next=NULL;
+    if(rear==NULL && front==NULL)
+    {
+        rear=newnode;
+        rear->prev=NULL;
+        rear->next=NULL;
+    }
+    else
+    {
+        rear->next=newnode;
+        newnode->next=NULL;
+        rear=newnode;
+    }
+}
+
+
+//Dequeue at rear.
+void dequeuerear()
+{
+    temp=front;
+    if(front==NULL && rear==NULL)
+    {
+        printf("\nQueue is empty.\n");
+    }
+    else
+    {
+        while(temp->next!=rear)
+        {
+            temp=temp->next;
+        }
+        temp->next=temp->next->next;
+    }
+}
+
+
+//Dequeue at front.
+void dequeuefront()
+{
+    if(rear==NULL && front==NULL)
+    {
+        printf("\nQueue is empty.\n");
+    }
+    else
+    {
+        temp=front;
+        front=front->next;
+        temp->next=NULL;
+    }
+}
+
+
+//Getvalue in front.
+void getfront()
+{
+    printf("The value present in front is:%d\n",front->data);
+}
+
+//Getvalue in rear.
+void getrear()
+{
+    printf("The value present in rear is:%d\n",rear->data);
+}
+
+//Display of elements in queue.
+void display()
+{
+    temp=front;
+    while(temp!=NULL)
+    {
+        printf("# %d #",temp->data);
+        temp=temp->next;
+    }
+}
+
+
+void main()
+{
+    int choice=0;
+    while(choice<8)
+    {
+        printf("\nOperations on Dqueues using linked lists.\n");
+        printf("1.enqueuefront().\n");
+        printf("2.enqueuerear().\n");
+        printf("3.dequeuefront().\n");
+        printf("4.dequeuerear().\n");
+        printf("5.getfront().\n");
+        printf("6.getrear().\n");
+        printf("7.Display().\n");
+        printf("Others: to exit().\n");
+        printf("enter u r choice:\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+            case 1:
+                    enqueuefront();
+                    break;
+            case 2:
+                    enqueuerear();
+                    break;
+            case 3:
+                    dequeuefront();
+                    break;
+            case 4:
+                    dequeuerear();
+                    break;
+            case 5:
+                    getfront();
+                    break;
+            case 6:
+                    getrear();
+                    break;
+            case 7:
+                    display();
+                    break;
+        }
+    }
+}
+
+
+
+
