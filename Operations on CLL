@@ -136,11 +136,29 @@ void count()
     count+=1;
     printf("\nThe number of elements present in a circular linked list is%d\n",count);
 }
+
+void reverse()
+{
+    struct node *temp=head;
+    struct node *prev=head;
+    struct node *current=head;
+    current=current->next;
+    temp=temp->next->next;
+    while(current!=head)
+    {
+        current->next=prev;
+        prev=current;
+        current=temp;
+        temp=temp->next;
+    }
+    head=prev;
+    current->next=head;
+}
 //Main function.
 void main()
 {
     int choice=0;
-    while(choice<10)
+    while(choice<11)
     {
         printf("\nOperations on Circular linked list\n");
         printf("1.creation of circular linked list\n");
@@ -152,6 +170,7 @@ void main()
         printf("7.deletion at ending\n");
         printf("8.deletion at specified position\n");
         printf("9.To count the number of elements present in a circular linked list\n");
+        printf("10.reverse\n");
         printf("others:to exit()\n");
         printf("enter your choice:\n");
         scanf("%d",&choice);
@@ -183,6 +202,9 @@ void main()
                     break;
             case 9:
                     count();
+                    break;
+            case 10:
+                    reverse();
                     break;
         }
     }
