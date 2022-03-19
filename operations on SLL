@@ -177,11 +177,27 @@ void sorting()
         }
     }
 }
+void search()
+{
+    int key;
+    temp=head;
+    printf("enter element to search:\n");
+    scanf("%d",&key);
+    while(temp!=NULL)
+    {
+        if(temp->data==key)
+        {
+            printf("element found.\n");
+            break;
+        }
+        temp=temp->next;
+    }
+}
 //Main function.
 int main()
 {
         int choice=0;
-        while(choice<12)
+        while(choice<13)
         {
             printf("\nOperations on Single linked list are:\n");
             printf("1.Creation.\n");
@@ -195,6 +211,7 @@ int main()
             printf("9.To count the number of elements in a Created Single Linked List.\n");
             printf("10.To reverse the elements of a Created single linked list.\n");
             printf("11.sorting of given single linked list.\n");
+            printf("12.searching.\n");
             printf("Others:Exit()\n");
             printf("Enter your choice:\n");
             scanf("%d",&choice);
@@ -232,6 +249,9 @@ int main()
                         break;
                 case 11:
                         sorting();
+                        break;
+                case 12:
+                        search();
                         break;
                 default:
                         break;
